@@ -1,0 +1,501 @@
+/* ==========================================================
+   Young — Portfolio
+   웜 샌드 종이 배경 + Fraunces 세리프 + 오버랩 프로젝트 카드
+   폰트: Fraunces(디스플레이) / Geist(본문) / Geist Mono(태그·메타)
+   ========================================================== */
+
+:root {
+  --bg: #eae3d3;            /* 웜 샌드 배경 */
+  --bg-soft: #e0d6c1;
+  --ink: #241c14;           /* 에스프레소 잉크 (내비 필) */
+  --card: rgba(43, 33, 24, 0.86);   /* 프로젝트 정보 카드 (반투명) */
+  --card-text: #f1eadd;
+  --text: #2a2118;
+  --text-soft: #6e6353;
+  --chip-border: rgba(241, 234, 221, 0.35);
+  --accent: #c2542b;        /* 번트 오렌지 */
+  --media-bg: #ddd2bb;
+  --shadow: 0 24px 60px rgba(46, 34, 20, 0.22);
+  --radius: 12px;
+  --max-width: 1120px;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-body: "Geist", -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+/* Fraunces는 큰 사이즈에서 자동으로 화려한 스월(J, g 등)이 들어간 Display
+   컷으로 전환됨 — opsz를 낮게 고정하고 WONK를 꺼서 차분한 글자 모양으로 */
+.logo,
+.hero-name,
+.section-title,
+.project-title,
+.footer-statement {
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 18, "WONK" 0;
+}
+
+html.dark {
+  --bg: #1c1712;
+  --bg-soft: #221c15;
+  --ink: #120e0a;
+  --card: rgba(42, 34, 25, 0.82);
+  --card-text: #ede5d6;
+  --text: #ede5d6;
+  --text-soft: #a39682;
+  --chip-border: rgba(237, 229, 214, 0.3);
+  --accent: #d3663a;
+  --media-bg: #252017;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* ===== Header — 플로팅 필 내비 ===== */
+.site-header {
+  position: sticky;
+  top: 16px;
+  z-index: 10;
+  width: max-content;
+  margin: 20px auto 0;
+  padding: 10px 14px 10px 22px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background: var(--ink);
+  color: #f1eadd;
+  border-radius: 99px;
+  box-shadow: 0 10px 30px rgba(30, 22, 12, 0.3);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.015em;
+}
+
+.logo-dot {
+  color: var(--accent);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.nav a {
+  position: relative;
+  color: rgba(241, 234, 221, 0.75);
+  transition: color 0.2s ease;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav a:hover {
+  color: #f1eadd;
+}
+
+.nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* 다크모드 토글 */
+.theme-toggle {
+  width: 46px;
+  height: 24px;
+  border: none;
+  border-radius: 99px;
+  background: rgba(241, 234, 221, 0.18);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform 0.3s ease;
+}
+
+html.dark .toggle-knob {
+  transform: translateX(20px);
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 66vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-inner {
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 28px;
+  animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-inner { animation: none; }
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3.5rem, 10vw, 6.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--text-soft);
+}
+
+.hero-name .accent {
+  color: var(--accent);
+}
+
+/* 이름 아래 — 역할(모노) 왼쪽 / 소개 오른쪽의 비대칭 메타 */
+.hero-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  padding-top: 22px;
+}
+
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+
+.hero-tagline {
+  font-size: 1.02rem;
+  color: var(--text-soft);
+  max-width: 40ch;
+  text-align: right;
+}
+
+/* ===== Section title ===== */
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  letter-spacing: -0.02em;
+  margin-bottom: 56px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  margin-top: 12px;
+  background: var(--accent);
+}
+
+/* ===== Projects ===== */
+.projects {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 60px 28px 40px;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+/* 한 프로젝트 = 12컬럼 그리드에서 미디어와 카드가 겹침 */
+.project-row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+}
+
+.project-media {
+  grid-column: 4 / 13;
+  grid-row: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--media-bg);
+  box-shadow: var(--shadow);
+  aspect-ratio: 16 / 9.5;
+}
+
+.project-media img,
+.project-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-card {
+  grid-column: 1 / 6;
+  grid-row: 1;
+  z-index: 2;
+  background: var(--card);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--card-text);
+  border-radius: var(--radius);
+  padding: 34px 32px;
+  box-shadow: var(--shadow);
+}
+
+/* 짝수 프로젝트는 좌우 반전 */
+.project-row.flip .project-media {
+  grid-column: 1 / 10;
+}
+
+.project-row.flip .project-card {
+  grid-column: 8 / 13;
+}
+
+/* hover 신호는 하나만 — 제목 아래 앰버 바가 자라남 */
+.project-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.project-title::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 3px;
+  margin-top: 10px;
+  border-radius: 2px;
+  background: var(--accent);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-row:hover .project-title::after {
+  width: 44px;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 4px 12px;
+  border: 1px solid var(--chip-border);
+  border-radius: 7px;
+  color: var(--card-text);
+}
+
+.project-desc {
+  font-size: 0.95rem;
+  color: var(--card-text);
+  opacity: 0.85;
+  margin-bottom: 22px;
+}
+
+.project-links {
+  display: flex;
+  gap: 18px;
+}
+
+.project-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.project-links a:hover {
+  transform: translateY(-3px);
+  color: var(--accent);
+}
+
+.project-links svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* 미디어가 없을 때 플레이스홀더 */
+.thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+/* ===== About ===== */
+.about {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 120px 28px 100px;
+}
+
+.about-text {
+  max-width: 58ch;
+  color: var(--text-soft);
+  font-size: 1.02rem;
+}
+
+/* ===== Footer — statement close ===== */
+.site-footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 28px 56px;
+  border-top: 1px solid var(--text-soft);
+}
+
+.footer-statement {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 28px;
+}
+
+.footer-statement a {
+  color: var(--accent);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.footer-statement a:hover {
+  border-bottom-color: var(--accent);
+}
+
+.footer-base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+}
+
+.footer-base a:hover {
+  color: var(--text);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 860px) {
+  .project-list {
+    gap: 80px;
+  }
+
+  .project-row,
+  .project-row.flip {
+    display: block;
+  }
+
+  .project-media,
+  .project-row.flip .project-media {
+    aspect-ratio: 16 / 10;
+  }
+
+  /* 카드가 미디어 하단에 살짝 겹치도록 */
+  .project-card,
+  .project-row.flip .project-card {
+    margin: -48px 16px 0;
+    padding: 28px 24px;
+    position: relative;
+  }
+
+  .hero {
+    min-height: 58vh;
+  }
+
+  .hero-meta {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hero-tagline {
+    text-align: left;
+  }
+
+  .site-header {
+    gap: 16px;
+    padding: 8px 10px 8px 16px;
+  }
+
+  .nav {
+    gap: 14px;
+    font-size: 0.84rem;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+  }
+}
