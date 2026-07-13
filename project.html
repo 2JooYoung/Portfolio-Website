@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project — Young</title>
+  <meta name="description" content="Project detail — Young's portfolio." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <a class="logo" href="index.html#top">young<span class="logo-dot">.</span></a>
+    <nav class="nav">
+      <a href="index.html#projects">projects</a>
+      <a href="index.html#about">about</a>
+      <a href="mailto:ljyg209@gmail.com">contact</a>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <span class="toggle-knob"></span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="detail">
+    <a class="back-link" href="index.html#projects">&larr; back to projects</a>
+
+    <header class="detail-head">
+      <h1 id="detail-title" class="detail-title">Loading…</h1>
+      <div id="detail-tags" class="detail-tags"></div>
+      <div id="detail-actions" class="detail-actions"></div>
+    </header>
+
+    <article id="detail-body" class="detail-body"></article>
+  </main>
+
+  <!-- ===== Footer — statement close ===== -->
+  <footer class="site-footer">
+    <p class="footer-statement">
+      Say hello —
+      <a href="mailto:ljyg209@gmail.com">ljyg209@gmail.com</a>
+    </p>
+    <div class="footer-base">
+      <span>© <span id="year"></span> Young</span>
+      <a href="https://github.com/" target="_blank" rel="noopener">github</a>
+    </div>
+  </footer>
+
+  <script src="js/projects.js"></script>
+  <script src="js/detail.js"></script>
+</body>
+</html>

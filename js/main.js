@@ -32,17 +32,56 @@ function renderProjects() {
         : "",
     ].join("");
 
+    const href = `project.html?id=${p.slug}`;
+
     return `
       <article class="project-row ${i % 2 ? "flip" : ""}">
-        <div class="project-media">${media}</div>
+        <a class="project-media" href="${href}" aria-label="${p.title} — view details">${media}</a>
         <div class="project-card">
-          <h3 class="project-title">${p.title}</h3>
+          <a class="project-title-link" href="${href}">
+            <h3 class="project-title">${p.title}</h3>
+          </a>
           <div class="project-tags">${tags}</div>
           <p class="project-desc">${p.desc || ""}</p>
-          ${links ? `<div class="project-links">${links}</div>` : ""}
+          <div class="project-footer">
+            <a class="project-more" href="${href}">view details &rarr;</a>
+            ${links ? `<div class="project-links">${links}</div>` : ""}
+          </div>
         </div>
       </article>
     `;
+  }).join("");
+}
+
+/* "…and more" 미니 프로젝트 그리드 */
+function renderMinis() {
+  const grid = document.getElementById("mini-grid");
+  if (!grid || typeof MINI_PROJECTS === "undefined") return;
+
+  grid.innerHTML = MINI_PROJECTS.map((p) => {
+    const isVideo = /\.(mp4|webm)$/i.test(p.image);
+    const media = p.image
+      ? isVideo
+        ? `<video src="${p.image}" autoplay loop muted playsinline></video>`
+        : `<img src="${p.image}" alt="${p.title}" loading="lazy" />`
+      : `<div class="thumb-placeholder">soon</div>`;
+
+    const href = p.slug
+      ? `project.html?id=${p.slug}`
+      : p.github || "";
+    const external = !p.slug && p.github;
+
+    const inner = `
+      <div class="mini-media">${media}</div>
+      <div class="mini-info">
+        <span class="mini-title">${p.title}</span>
+        <span class="mini-tags">${(p.tags || []).slice(0, 2).join(" · ")}</span>
+      </div>
+    `;
+
+    return href
+      ? `<a class="mini-card" href="${href}" ${external ? 'target="_blank" rel="noopener"' : ""}>${inner}</a>`
+      : `<div class="mini-card">${inner}</div>`;
   }).join("");
 }
 
@@ -66,6 +105,7 @@ function initTheme() {
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   renderProjects();
+  renderMinis();
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 });

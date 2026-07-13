@@ -30,6 +30,7 @@
 .hero-name,
 .section-title,
 .project-title,
+.detail-title,
 .footer-statement {
   font-optical-sizing: none;
   font-variation-settings: "opsz" 18, "WONK" 0;
@@ -270,6 +271,7 @@ html.dark .toggle-knob {
 }
 
 .project-media {
+  display: block;
   grid-column: 4 / 13;
   grid-row: 1;
   border-radius: var(--radius);
@@ -333,6 +335,10 @@ html.dark .toggle-knob {
   width: 44px;
 }
 
+.project-title-link {
+  display: inline-block;
+}
+
 .project-tags {
   display: flex;
   flex-wrap: wrap;
@@ -358,9 +364,29 @@ html.dark .toggle-knob {
   margin-bottom: 22px;
 }
 
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.project-more {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--card-text);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.project-more:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 .project-links {
   display: flex;
-  gap: 18px;
+  gap: 14px;
 }
 
 .project-links a {
@@ -394,6 +420,69 @@ html.dark .toggle-knob {
   color: var(--text-soft);
   font-size: 0.85rem;
   letter-spacing: 0.08em;
+}
+
+/* ===== "…and more" 미니 프로젝트 그리드 ===== */
+.more-projects {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 110px 28px 20px;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 28px;
+}
+
+.mini-card {
+  display: block;
+}
+
+.mini-media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--media-bg);
+  box-shadow: 0 12px 30px rgba(46, 34, 20, 0.14);
+}
+
+html.dark .mini-media {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.mini-media img,
+.mini-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mini-info {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.mini-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  transition: color 0.2s ease;
+}
+
+.mini-card:hover .mini-title {
+  color: var(--accent);
+}
+
+.mini-tags {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-soft);
+  white-space: nowrap;
 }
 
 /* ===== About ===== */
@@ -448,6 +537,148 @@ html.dark .toggle-knob {
   color: var(--text);
 }
 
+/* ===== Project detail page (project.html) ===== */
+.detail {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 48px 28px 100px;
+}
+
+.back-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  margin-bottom: 40px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.detail-head {
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--text-soft);
+  margin-bottom: 44px;
+}
+
+.detail-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.detail-tags .tag {
+  color: var(--text-soft);
+  border-color: color-mix(in srgb, var(--text-soft) 45%, transparent);
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 99px;
+  background: var(--ink);
+  color: #f1eadd;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.detail-btn:hover {
+  transform: translateY(-2px);
+  background: var(--accent);
+}
+
+.detail-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* 상세 본문 (details/<slug>.html 내용) */
+.detail-body {
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.detail-lead {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 36px;
+}
+
+.detail-body h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  margin: 48px 0 16px;
+}
+
+.detail-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 30px 0 10px;
+}
+
+.detail-body p {
+  color: var(--text-soft);
+  margin-bottom: 16px;
+}
+
+.detail-body ul {
+  color: var(--text-soft);
+  margin: 0 0 16px 1.2em;
+}
+
+.detail-body li {
+  margin-bottom: 6px;
+}
+
+.detail-body strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.detail-body figure {
+  margin: 28px 0;
+}
+
+.detail-body figure img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.detail-body figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  text-align: center;
+  margin-top: 10px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 860px) {
   .project-list {
@@ -476,6 +707,11 @@ html.dark .toggle-knob {
     min-height: 58vh;
   }
 
+  .mini-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px 20px;
+  }
+
   .hero-meta {
     flex-direction: column;
     gap: 14px;
@@ -497,5 +733,11 @@ html.dark .toggle-knob {
 
   .logo {
     font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mini-grid {
+    grid-template-columns: 1fr;
   }
 }
