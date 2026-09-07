@@ -23,7 +23,7 @@ function getProject() {
 function loadDetailScript(slug) {
   return new Promise((resolve) => {
     const s = document.createElement("script");
-    s.src = `details/${slug}.js`;
+    s.src = `details/${slug}.js?v=2`;
     s.onload = () => resolve(true);
     s.onerror = () => resolve(false);
     document.head.appendChild(s);
