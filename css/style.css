@@ -679,6 +679,15 @@ html.dark .mini-media {
   margin-top: 10px;
 }
 
+.detail-body code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: color-mix(in srgb, var(--text-soft) 14%, transparent);
+  padding: 2px 7px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 860px) {
   .project-list {
